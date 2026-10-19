@@ -1,5 +1,5 @@
 const gameBoard = (() => {
-    const board = ["", "", "", "", "", "", "", "", ""]
+    const board = ["", "X", "", "", "X", "O", "", "X", ""]
 
     const getBoard = () => [...board]
 
@@ -84,16 +84,27 @@ const gameController = (() => {
 
     const checkWinner = (mark) => {
 
-        console.log(gameBoard.getBoard()[3])
+        const board = gameBoard.getBoard()
 
-        winningCombinations.forEach((combo) => {
-            combo.forEach(index => {
-                //console.log(combo, index)
-                
-                
-            })
-            //console.log(combo)
+        // Manier claude tip
+        return winningCombinations.some(combo => {
+            return combo.every(cell => board[cell] === mark)
         })
+
+
+        // // EIGEN MANIER DAT IK HEB GEVONDEN
+        // for(const combo of winningCombinations){
+        //     let markCount = 0
+        //     for(const index  of combo) {
+        //         if(board[index] === mark) {
+        //             markCount += 1
+        //         }
+        //     }
+
+        //     if(markCount === 3) return true
+        // }
+        // return false
+
     } 
 
 
@@ -102,5 +113,7 @@ const gameController = (() => {
 })()
 
 
-gameController.playRound(3)
-gameController.checkWinner()
+//gameController.playRound(3)
+//gameController.checkWinner("O")
+
+console.log(gameController.checkWinner("X"))

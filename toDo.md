@@ -1,1 +1,1 @@
-3d. write check winner(mark)
+3c. Tie check
