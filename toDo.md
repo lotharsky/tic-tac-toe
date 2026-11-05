@@ -1,1 +1,1 @@
-3c. Tie check
+spel check: kijken waarom er tie is ipv win indien full house???

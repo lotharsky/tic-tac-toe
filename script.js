@@ -1,5 +1,5 @@
 const gameBoard = (() => {
-    const board = ["", "X", "", "", "X", "O", "", "X", ""]
+    const board = ["", "X", "X", "X", "0", "O", "O", "X", "B"]
 
     const getBoard = () => [...board]
 
@@ -44,6 +44,8 @@ const gameController = (() => {
 
     const players = []
 
+    let gameOver = false
+
     const winningCombinations = [
     // Rows
     [0, 1, 2],
@@ -72,13 +74,35 @@ const gameController = (() => {
         } else activePlayer = players[0]
     } 
 
+
+    
+
     const playRound = (index) => {
+
+        if(gameOver === true) {
+            return
+        }
+
         if(gameBoard.placeMarker(index, activePlayer.mark) === false) {
             return console.log("spot taken")
         } else {
-            gameBoard.printBoard()
-            switchTurn()
-            console.log(getActivePlayer())
+
+            if(checkWinner() === true) {
+                console.log(`${activePlayer.name} is the winner`)
+                gameOver = true
+                return
+            } 
+            else if(checkTie() === true) {
+                console.log("its a tie")
+                console.log("wot")
+                gameOver = true
+                return
+
+            } else {
+                gameBoard.printBoard()
+                switchTurn()
+                console.log(getActivePlayer())
+            }
         }
     }
 
@@ -90,8 +114,6 @@ const gameController = (() => {
         return winningCombinations.some(combo => {
             return combo.every(cell => board[cell] === mark)
         })
-
-
         // // EIGEN MANIER DAT IK HEB GEVONDEN
         // for(const combo of winningCombinations){
         //     let markCount = 0
@@ -104,16 +126,30 @@ const gameController = (() => {
         //     if(markCount === 3) return true
         // }
         // return false
-
     } 
 
+    const checkTie = () => {
+        if(gameBoard.getBoard().every(cell => {return cell != ""})) {
+            //console.log("its a tie")
+            return true
+        } 
 
-    return {getActivePlayer, switchTurn, playRound, checkWinner}
+        return false
+    }
+
+    const restart = () => {
+        gameBoard.reset()
+        activePlayer = players[0]
+        gameOver = false
+    }
+
+    return {getActivePlayer, playRound, checkWinner, checkTie, restart}
 
 })()
 
 
-//gameController.playRound(3)
+gameController.playRound(0)
 //gameController.checkWinner("O")
 
-console.log(gameController.checkWinner("X"))
+//console.log(gameController.checkWinner("X"))
+//console.log(gameController.checkTie())
