@@ -1,5 +1,5 @@
 const gameBoard = (() => {
-    const board = ["", "X", "X", "X", "0", "O", "O", "X", "B"]
+    const board = ["", "X", "X", "X", "O", "O", "O", "O", ""]
 
     const getBoard = () => [...board]
 
@@ -87,8 +87,9 @@ const gameController = (() => {
             return console.log("spot taken")
         } else {
 
-            if(checkWinner() === true) {
+            if(checkWinner(activePlayer.mark) === true) {
                 console.log(`${activePlayer.name} is the winner`)
+                gameBoard.printBoard()
                 gameOver = true
                 return
             } 
@@ -149,6 +150,7 @@ const gameController = (() => {
 
 
 gameController.playRound(0)
+gameController.playRound(8)
 //gameController.checkWinner("O")
 
 //console.log(gameController.checkWinner("X"))

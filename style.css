@@ -1,3 +1,45 @@
-h1 {
-    color: red;
+* {
+    margin: 0;
+    padding: 0;
 }
+
+.TitleDiv {
+    background-color: black;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+
+}
+
+h1 {
+    color: white;
+}
+
+.ScoreBoard {
+
+    background-color: red;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.ScoreBoard p {
+    font-size: 80px;
+}
+
+.BoardDiv {
+
+    padding: 5rem;
+
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Board {
+    background-color: black;
+    width: 25rem;
+    height: 25rem;
+}
+
